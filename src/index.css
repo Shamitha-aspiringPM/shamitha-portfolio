@@ -247,6 +247,11 @@ h1 {
   color: var(--gray-shipped);
 }
 
+.status-in-progress {
+  background: var(--ochre-soft);
+  color: var(--ochre);
+}
+
 .status-open {
   background: var(--ochre-soft);
   color: var(--ochre);

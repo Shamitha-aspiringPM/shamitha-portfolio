@@ -53,16 +53,16 @@ export const projects = [
   {
     id: 'PORT-04',
     slug: 'cortexon-academy',
-    status: 'LIVE',
+    status: 'IN PROGRESS',
     name: 'Cortexon Academy',
-    origin: 'This one started differently — a real local business needed a real site, not a self-directed exercise.',
-    summary: 'A multi-page website for a Mysore-based Abacus and Vedic Mathematics academy.',
-    tags: ['React', 'Vite', 'Client Project'],
+    origin: 'This one started differently — an honorary build for a real local business, not a self-directed exercise.',
+    summary: 'A multi-page website for a Mysore-based Abacus and Vedic Mathematics academy — still in progress.',
+    tags: ['React', 'Vite', 'Client Project', 'Honorary'],
     live: null,
     repo: 'https://github.com/Shamitha-aspiringPM',
     caseStudy: [
-      'A complete multi-page website built for Cortexon Academy LLP, a Mysore-based Abacus and Vedic Mathematics academy — a real local business, not a self-directed exercise.',
-      'Built with React and Vite, deployed on Vercel. Working with an actual client meant designing for their students and parents as the real audience, not an abstract one.',
+      'A multi-page website being built for Cortexon Academy LLP, a Mysore-based Abacus and Vedic Mathematics academy — a real local business, not a self-directed exercise. This one is done on an honorary basis and is still in progress, not yet live.',
+      'Built with React and Vite, to be deployed on Vercel once complete. Working with an actual client means designing for their students and parents as the real audience, not an abstract one.',
     ],
   },
 ]

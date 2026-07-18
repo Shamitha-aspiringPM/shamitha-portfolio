@@ -19,7 +19,7 @@ import {
 } from '../data/resume.js'
 
 function StatusTag({ status }) {
-  return <span className={`status-tag status-${status.toLowerCase()}`}>{status}</span>
+  return <span className={`status-tag status-${status.toLowerCase().replace(/\s+/g, '-')}`}>{status}</span>
 }
 
 const FILTERS = ['ALL', 'WORK', 'PERSONAL']
@@ -130,7 +130,7 @@ export default function Home() {
                   onFocus={() => setPreviewSlug(p.slug)}
                   onClick={() => track('Project Opened', { project: p.name, kind: p.kind })}
                 >
-                  <span className="project-list-num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="project-list-num">{String(p.num).padStart(2, '0')}</span>
                   <div className="project-list-main">
                     <span className="project-list-name">{p.name}</span>
                     <span className="project-list-kind">

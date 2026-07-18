@@ -13,12 +13,13 @@ const order = [
 ]
 
 export const showcase = order
-  .map(({ kind, slug }) => {
+  .map(({ kind, slug }, i) => {
     const item = kind === 'work' ? caseStudies.find((c) => c.slug === slug) : projects.find((p) => p.slug === slug)
     if (!item) return null
     return {
       ...item,
       kind,
+      num: i + 1,
       path: kind === 'work' ? `/work/${slug}` : `/projects/${slug}`,
     }
   })

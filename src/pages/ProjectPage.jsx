@@ -1,9 +1,10 @@
 import React from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { getProject, projects } from '../data/projects.js'
+import { getProject } from '../data/projects.js'
+import { showcase } from '../data/showcase.js'
 
 function StatusTag({ status }) {
-  return <span className={`status-tag status-${status.toLowerCase()}`}>{status}</span>
+  return <span className={`status-tag status-${status.toLowerCase().replace(/\s+/g, '-')}`}>{status}</span>
 }
 
 export default function ProjectPage() {
@@ -12,14 +13,17 @@ export default function ProjectPage() {
 
   if (!project) return <Navigate to="/" replace />
 
-  const index = projects.findIndex((p) => p.slug === slug)
-  const next = projects[(index + 1) % projects.length]
+  const index = showcase.findIndex((s) => s.slug === slug)
+  const num = showcase[index]?.num
+  const next = showcase[(index + 1) % showcase.length]
 
   return (
     <main className="project-page">
       <div className="project-head">
         <div className="ticket-head">
-          <span className="ticket-id">{project.id}</span>
+          <span className="ticket-id">
+            {String(num).padStart(2, '0')} / {String(showcase.length).padStart(2, '0')}
+          </span>
           <StatusTag status={project.status} />
         </div>
         <h1 className="project-title">{project.name}</h1>
@@ -63,8 +67,8 @@ export default function ProjectPage() {
       </div>
 
       <div className="project-next">
-        <span className="eyebrow">NEXT TICKET</span>
-        <Link to={`/projects/${next.slug}`} className="project-next-link">
+        <span className="eyebrow">NEXT — {next.kind === 'work' ? 'CASE STUDY' : 'PROJECT'}</span>
+        <Link to={next.path} className="project-next-link">
           {next.name} →
         </Link>
       </div>
