@@ -34,6 +34,13 @@ export const experience = [
       'Product Owner with experience leading the development of B2B SaaS and enterprise applications from concept to delivery. Specialized in product strategy, roadmap planning, user story creation, backlog prioritization, and Agile product delivery — collaborating with cross-functional teams, translating business needs into customer-centric features, and driving continuous product improvements through stakeholder feedback and user research.',
     products: [
       {
+        name: 'NLP-Powered Publishing Platform',
+        bullets: [
+          'Defined and executed product strategy for an AI/NLP-powered publishing platform that transformed raw news content into publication-ready articles.',
+          'Cut manual content creation effort by 60–80% and accelerated publishing turnaround 3–5x.',
+        ],
+      },
+      {
         name: 'Employee Feedback & Performance Platform',
         bullets: [
           'Led product development of an employee feedback platform supporting anonymous and non-anonymous feedback workflows.',
@@ -152,7 +159,7 @@ export const certifications = [
   'Agile Methodologies — Udemy',
 ]
 
-export const accomplishments = ['Guidehouse Gem Award, 2025']
+export const accomplishments = ['Guidehouse Gem Award, Q3 2025', 'Guidehouse Gem Award, Q2 2026']
 
 export const languages = ['English', 'Hindi', 'Kannada', 'Telugu']
 
