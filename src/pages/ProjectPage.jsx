@@ -23,6 +23,7 @@ export default function ProjectPage() {
           <StatusTag status={project.status} />
         </div>
         <h1 className="project-title">{project.name}</h1>
+        {project.origin && <p className="project-origin">{project.origin}</p>}
         <ul className="ticket-tags">
           {project.tags.map((t) => (
             <li key={t}>{t}</li>

@@ -4,6 +4,7 @@ export const projects = [
     slug: 'ventureforge-ai',
     status: 'LIVE',
     name: 'VentureForge AI',
+    origin: 'It started with watching my husband struggle to prompt AI effectively for something that mattered.',
     summary:
       'AI-powered venture analysis tool that lets founders validate, plan, and stress-test an idea.',
     tags: ['React', 'Claude API', 'Mixpanel'],
@@ -20,6 +21,7 @@ export const projects = [
     slug: 'payvault',
     status: 'LIVE',
     name: 'PayVault',
+    origin: 'It started with tracking my own invisible subscription spend — money leaking out in small, easy-to-miss amounts.',
     summary: 'A UPI payment app prototype with subscription management, for Indian consumers.',
     tags: ['React', 'Figma', 'Fintech UX'],
     live: 'https://prototype-payvault.netlify.app',
@@ -34,11 +36,12 @@ export const projects = [
   {
     id: 'PORT-03',
     slug: 'trade-journal',
-    status: 'SHIPPED',
+    status: 'LIVE',
     name: 'Trade Journal',
+    origin: 'It started with watching my father manually journal his trades on paper, night after night.',
     summary: 'A full-stack intraday trading journal, built end-to-end.',
     tags: ['React', 'Vite', 'Supabase'],
-    live: null,
+    live: 'https://trade-journal-pi-seven.vercel.app',
     repo: 'https://github.com/Shamitha-aspiringPM',
     video: '/video/trade-journal-demo.mp4',
     caseStudy: [
@@ -52,6 +55,7 @@ export const projects = [
     slug: 'cortexon-academy',
     status: 'LIVE',
     name: 'Cortexon Academy',
+    origin: 'This one started differently — a real local business needed a real site, not a self-directed exercise.',
     summary: 'A multi-page website for a Mysore-based Abacus and Vedic Mathematics academy.',
     tags: ['React', 'Vite', 'Client Project'],
     live: null,

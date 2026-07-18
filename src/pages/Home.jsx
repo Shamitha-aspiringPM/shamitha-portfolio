@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects.js'
+import { manifesto } from '../data/about.js'
 import Icon from '../components/Icon.jsx'
 import ExperienceCard from '../components/ExperienceCard.jsx'
 import {
@@ -57,11 +58,16 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="perforation" aria-hidden="true">
-        {Array.from({ length: 40 }).map((_, i) => (
-          <span key={i} />
-        ))}
-      </div>
+      <section className="manifesto">
+        <p className="manifesto-lead">{manifesto.lead}</p>
+        <p className="manifesto-intro">{manifesto.intro}</p>
+        <div className="manifesto-body">
+          {manifesto.body.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+        <p className="manifesto-closing">{manifesto.closing}</p>
+      </section>
 
       <div className="stats-strip">
         {stats.map((s) => (
@@ -76,8 +82,8 @@ export default function Home() {
         <section className="section">
           <div className="section-head-row">
             <div>
-              <p className="eyebrow">SHIPPED</p>
-              <h2 className="section-title">Product tickets, closed</h2>
+              <p className="eyebrow">WHAT I'VE BUILT</p>
+              <h2 className="section-title">Products that started as friction</h2>
             </div>
             <div className="filter-group" role="group" aria-label="Filter projects by status">
               {FILTERS.map((f) => (
@@ -93,25 +99,24 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="ticket-grid">
-            {visible.map((p) => (
-              <Link
-                to={`/projects/${p.slug}`}
-                className={`ticket ticket-${p.status.toLowerCase()}`}
-                key={p.id}
-              >
-                <div className="ticket-head">
-                  <span className="ticket-id">{p.id}</span>
-                  <StatusTag status={p.status} />
+          <div className="project-rows">
+            {visible.map((p, i) => (
+              <Link to={`/projects/${p.slug}`} className="project-row" key={p.id}>
+                <span className="project-row-num">{String(i + 1).padStart(2, '0')}</span>
+                <div className="project-row-body">
+                  {p.origin && <p className="project-row-origin">{p.origin}</p>}
+                  <div className="project-row-title-line">
+                    <h3 className="project-row-name">{p.name}</h3>
+                    <StatusTag status={p.status} />
+                  </div>
+                  <p className="project-row-summary">{p.summary}</p>
+                  <ul className="ticket-tags">
+                    {p.tags.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="ticket-name">{p.name}</h3>
-                <p className="ticket-summary">{p.summary}</p>
-                <ul className="ticket-tags">
-                  {p.tags.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-                <span className="ticket-open">Open ticket →</span>
+                <span className="project-row-arrow" aria-hidden="true">→</span>
               </Link>
             ))}
           </div>
