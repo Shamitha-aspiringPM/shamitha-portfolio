@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import { projects } from '../data/projects.js'
 import { manifesto } from '../data/about.js'
 import Icon from '../components/Icon.jsx'
-import ExperienceCard from '../components/ExperienceCard.jsx'
-import ProjectModal from '../components/ProjectModal.jsx'
+import ExperienceTabs from '../components/ExperienceTabs.jsx'
+import StatCard from '../components/StatCard.jsx'
 import Reveal from '../components/Reveal.jsx'
+import { track } from '../analytics.js'
 import {
   experience,
   stats,
@@ -24,12 +26,14 @@ const FILTERS = ['ALL', 'LIVE', 'SHIPPED']
 
 export default function Home() {
   const [filter, setFilter] = useState('ALL')
-  const [activeProject, setActiveProject] = useState(null)
 
   const visible = useMemo(
     () => (filter === 'ALL' ? projects : projects.filter((p) => p.status === filter)),
     [filter],
   )
+
+  const [previewSlug, setPreviewSlug] = useState(projects[0]?.slug)
+  const preview = visible.find((p) => p.slug === previewSlug) || visible[0]
 
   return (
     <>
@@ -74,10 +78,7 @@ export default function Home() {
 
       <Reveal className="stats-strip">
         {stats.map((s) => (
-          <div className="stat-block" key={s.label}>
-            <p className="stat-value">{s.value}</p>
-            <p className="stat-label">{s.label}</p>
-          </div>
+          <StatCard stat={s} key={s.label} />
         ))}
       </Reveal>
 
@@ -88,7 +89,7 @@ export default function Home() {
               <div>
                 <p className="eyebrow">WHAT I'VE BUILT</p>
                 <h2 className="section-title">Products that started as friction</h2>
-                <p className="section-hint">Click any project to preview it here.</p>
+                <p className="section-hint">Hover a project to preview, click to open it.</p>
               </div>
               <div className="filter-group" role="group" aria-label="Filter projects by status">
                 {FILTERS.map((f) => (
@@ -105,44 +106,49 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="project-rows">
-            {visible.map((p, i) => (
-              <Reveal key={p.id} delay={i * 60}>
-                <button className="project-row" onClick={() => setActiveProject(p)}>
-                  <span className="project-row-num">{String(i + 1).padStart(2, '0')}</span>
-                  <div className="project-row-body">
-                    {p.origin && <p className="project-row-origin">{p.origin}</p>}
-                    <div className="project-row-title-line">
-                      <h3 className="project-row-name">{p.name}</h3>
-                      <StatusTag status={p.status} />
-                    </div>
-                    <p className="project-row-summary">{p.summary}</p>
-                    <ul className="ticket-tags">
-                      {p.tags.map((t) => (
-                        <li key={t}>{t}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <span className="project-row-arrow" aria-hidden="true">＋</span>
-                </button>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="project-showcase">
+            <div className="project-list-col">
+              {visible.map((p, i) => (
+                <Link
+                  to={`/projects/${p.slug}`}
+                  key={p.id}
+                  className={`project-list-item ${preview?.slug === p.slug ? 'is-active' : ''}`}
+                  onMouseEnter={() => setPreviewSlug(p.slug)}
+                  onFocus={() => setPreviewSlug(p.slug)}
+                  onClick={() => track('Project Opened', { project: p.name })}
+                >
+                  <span className="project-list-num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="project-list-name">{p.name}</span>
+                  <StatusTag status={p.status} />
+                </Link>
+              ))}
+            </div>
+
+            {preview && (
+              <div className={`project-preview-panel accent-${visible.indexOf(preview) % 2}`}>
+                {preview.origin && <p className="preview-origin">{preview.origin}</p>}
+                <h3 className="preview-name">{preview.name}</h3>
+                <p className="preview-summary">{preview.summary}</p>
+                <ul className="ticket-tags">
+                  {preview.tags.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ul>
+                <span className="preview-cta">Open case study →</span>
+              </div>
+            )}
+          </Reveal>
         </section>
 
         <section className="section">
           <Reveal>
             <p className="eyebrow">CHANGELOG</p>
             <h2 className="section-title">Experience</h2>
-            <p className="section-hint">Tap a role to expand the full write-up.</p>
+            <p className="section-hint">Switch companies with the tabs below.</p>
           </Reveal>
-          <div className="exp-list">
-            {experience.map((item, i) => (
-              <Reveal key={item.org} delay={i * 60}>
-                <ExperienceCard item={item} defaultOpen={i === 0} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <ExperienceTabs items={experience} />
+          </Reveal>
         </section>
 
         <section className="section">
@@ -206,8 +212,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
     </>
   )
 }

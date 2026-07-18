@@ -1,9 +1,9 @@
 # Shamitha S — Product Portfolio
 
-A multi-page React + Vite portfolio: a home page with a filterable grid of
-shipped products, and a dedicated page per project (VentureForge AI, PayVault,
-Trade Journal, Cortexon Academy) — including an embedded demo video on the
-Trade Journal page and a linked Notion case study on PayVault.
+A React + Vite portfolio: a home page with your manifesto, a hover-preview
+project index (click a project to open its full page), a tabbed experience
+section, flip-to-reveal stat cards, and Mixpanel analytics tracking who
+looks at what.
 
 ## 1. Run it locally (optional, to preview before deploying)
 
@@ -12,46 +12,43 @@ npm install
 npm run dev
 ```
 
-Opens at http://localhost:5173 — click into any project ticket to see its page.
+Opens at http://localhost:5173
 
-## 2. Edit your details before deploying
+## 2. Analytics (Mixpanel) — already set up
 
-Open `src/data/projects.js` — this is the single source of truth for every
-project page:
-- Update each `repo` field to the specific GitHub repo once you have one per project.
-- `trade-journal` and `cortexon-academy` have `live: null` — add the deployed
-  URL as a string once those are live, e.g. `live: 'https://your-site.vercel.app'`.
-- `caseStudy` is an array of paragraphs shown on each project's page — edit
-  the wording to match your voice.
-- The Trade Journal video lives at `public/video/trade-journal-demo.mp4` and
-  is already wired up via the `video` field — swap the file if you want a
-  different cut.
-- The PayVault Notion case study link is in the `notionCaseStudy` field —
-  update it if the link changes.
+Your Mixpanel project token is already wired into `index.html`. No setup
+needed — once this is deployed, these events start showing up in Mixpanel's
+"Live View":
 
-Open `src/pages/Home.jsx` for the `changelog` array — placeholder role/notes
-for Kaos Agency and Wipro Technologies are there; replace with your actual
-title and a line about what you did there.
+- `Page Viewed` — fires on every route change (home, and each project's page)
+- `Project Opened` — which project someone clicked into, from the home page list
+- `Experience Tab Viewed` — which company tab someone switched to
+- `Stat Card Flipped` — which stat someone tapped to read the detail on
 
-## 3. Deploy to Netlify
+You'll see these live in Mixpanel's "Live View" once the site is deployed
+and someone visits it.
 
-**Option A — GitHub (recommended, gives you auto-deploys on every push):**
-1. Push this folder to a new GitHub repo.
+## 3. Edit your details
+
+- `src/data/projects.js` — project descriptions, live/repo links, origin lines, tags
+- `src/data/resume.js` — experience, skills, education, certifications, stats
+- `src/data/about.js` — the manifesto text on the home page
+
+## 4. Deploy to Netlify
+
+**Option A — GitHub (recommended, auto-deploys on every push):**
+1. Push this folder to your GitHub repo.
 2. Go to [app.netlify.com](https://app.netlify.com) → "Add new site" →
    "Import an existing project" → connect GitHub → pick the repo.
 3. Netlify reads `netlify.toml` automatically (build command `npm run build`,
    publish folder `dist`, plus a redirect rule so refreshing a project page
-   like `/projects/payvault` doesn't 404). Click **Deploy**.
-4. Once live, go to Site settings → change the site name to something like
-   `shamitha-srinivas` so your URL reads `shamitha-srinivas.netlify.app`.
+   doesn't 404). Click **Deploy**.
 
 **Option B — Drag and drop (fastest, no auto-deploys):**
-1. Run `npm install && npm run build` locally — this creates a `dist` folder.
+1. Run `npm install && npm run build` locally — creates a `dist` folder.
 2. Go to [app.netlify.com/drop](https://app.netlify.com/drop) and drag the
    `dist` folder in.
 
-Note: the video file is ~4.4MB, well within Netlify's limits either way.
-
-## 4. Optional: connect a custom domain
+## 5. Optional: connect a custom domain
 
 Site settings → Domain management → Add a domain, if you buy one later.

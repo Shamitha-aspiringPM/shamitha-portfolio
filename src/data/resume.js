@@ -94,10 +94,26 @@ export const experience = [
 ]
 
 export const stats = [
-  { value: '7+', label: 'Years across product & tech' },
-  { value: '3', label: 'Domains — healthtech, fintech, insurtech' },
-  { value: '5+', label: 'Concurrent products owned at once' },
-  { value: '30%', label: 'Adoption lift, enterprise analytics' },
+  {
+    value: '7+',
+    label: 'Years across product & tech',
+    detail: 'From QA and test analysis at Wipro, through 0→1 SaaS product ownership at Kaos, to enterprise healthcare analytics at Guidehouse.',
+  },
+  {
+    value: '3',
+    label: 'Domains — healthtech, fintech, insurtech',
+    detail: 'U.S. healthcare payer analytics, UPI payments & subscriptions, and insurance QA — each with its own compliance bar and user trust problem.',
+  },
+  {
+    value: '5+',
+    label: 'Concurrent products owned at once',
+    detail: 'As sole Product Owner at Kaos, running a publishing platform, a CRM portal, and an employee feedback tool in parallel.',
+  },
+  {
+    value: '30%',
+    label: 'Adoption lift, enterprise analytics',
+    detail: 'From defining requirements and shaping delivery for a 20+ module self-service analytics platform at Guidehouse.',
+  },
 ]
 
 export const skillGroups = [

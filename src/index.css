@@ -271,28 +271,68 @@ h1 {
   flex: 0 0 auto;
 }
 
-/* ---------- Stats strip ---------- */
+/* ---------- Stats strip (flip cards) ---------- */
 
 .stats-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
+  gap: 12px;
   margin-bottom: 56px;
 }
 
-.stat-block {
-  background: var(--surface);
-  padding: 20px 16px;
+.stat-card {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  perspective: 1000px;
+  height: 118px;
+}
+
+.stat-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.stat-card-flipped .stat-card-inner {
+  transform: rotateY(180deg);
+}
+
+.stat-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+}
+
+.stat-card-front {
+  background: var(--surface);
+}
+
+.stat-card:hover .stat-card-front {
+  border-color: var(--teal);
+}
+
+.stat-card-back {
+  background: var(--teal-soft);
+  border-color: var(--teal);
+  transform: rotateY(180deg);
 }
 
 .stat-value {
   font-family: var(--font-display);
-  font-size: clamp(26px, 3.5vw, 34px);
+  font-size: clamp(24px, 3.2vw, 30px);
   font-weight: 600;
   color: var(--teal);
   margin: 0 0 4px;
@@ -300,10 +340,25 @@ h1 {
 
 .stat-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--ink-soft);
   margin: 0;
   line-height: 1.35;
+}
+
+.stat-card-hint {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--line);
+  margin-top: 6px;
+  letter-spacing: 0.06em;
+}
+
+.stat-detail {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0;
 }
 
 /* ---------- Manifesto ---------- */
@@ -457,99 +512,112 @@ h1 {
   color: var(--teal);
 }
 
-/* ---------- Project rows (editorial list, not tiles) ---------- */
+/* ---------- Project showcase (hover-preview split layout) ---------- */
 
-.project-rows {
+.project-showcase {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 32px;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.project-list-col {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
 }
 
-.project-row {
-  display: grid;
-  grid-template-columns: 64px 1fr 28px;
-  align-items: start;
-  gap: 20px;
-  padding: 32px 0;
-  border-top: 1px solid var(--line);
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
-  background: none;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  text-align: left;
-  font-family: inherit;
-  cursor: pointer;
-  transition: padding-left 0.2s ease, background 0.2s ease;
-}
-
-.project-row:hover {
-  padding-left: 8px;
-  background: linear-gradient(90deg, var(--surface) 0%, transparent 60%);
-}
-
-.project-row-num {
-  font-family: var(--font-display);
-  font-size: 38px;
-  font-weight: 600;
-  color: var(--line);
-  line-height: 1;
-  transition: color 0.2s ease;
-}
-
-.project-row:hover .project-row-num {
-  color: var(--teal);
-}
-
-.project-row-body {
-  min-width: 0;
-}
-
-.project-row-origin {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14.5px;
-  color: var(--ochre);
-  margin: 0 0 8px;
-  line-height: 1.4;
-}
-
-.project-row-title-line {
+.project-list-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+  padding: 18px 18px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  transition: background 0.15s ease, padding-left 0.15s ease;
 }
 
-.project-row-name {
+.project-list-item:last-child {
+  border-bottom: none;
+}
+
+.project-list-item:hover,
+.project-list-item.is-active {
+  background: var(--paper);
+  padding-left: 22px;
+}
+
+.project-list-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--line);
+}
+
+.project-list-item.is-active .project-list-num,
+.project-list-item:hover .project-list-num {
+  color: var(--teal);
+}
+
+.project-list-name {
   font-family: var(--font-display);
-  font-size: clamp(21px, 2.6vw, 26px);
+  font-size: 17px;
   font-weight: 600;
-  margin: 0;
+  flex: 1;
+  min-width: 0;
 }
 
-.project-row-summary {
+.project-preview-panel {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.project-preview-panel.accent-0 {
+  background: linear-gradient(135deg, var(--teal-soft) 0%, var(--surface) 65%);
+}
+
+.project-preview-panel.accent-1 {
+  background: linear-gradient(135deg, var(--ochre-soft) 0%, var(--surface) 65%);
+}
+
+.preview-origin {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ochre);
+  margin: 0 0 10px;
+  line-height: 1.4;
+  max-width: 46ch;
+}
+
+.preview-name {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.preview-summary {
   font-size: 15px;
   line-height: 1.6;
   color: var(--ink-soft);
-  max-width: 62ch;
-  margin: 0 0 12px;
+  max-width: 48ch;
+  margin: 0 0 16px;
 }
 
-.project-row-arrow {
-  font-size: 18px;
-  color: var(--ink-soft);
-  transition: transform 0.25s ease, color 0.2s ease;
-  justify-self: end;
-  padding-top: 6px;
-}
-
-.project-row:hover .project-row-arrow {
-  transform: rotate(90deg);
+.preview-cta {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
   color: var(--teal);
+  margin-top: 16px;
 }
 
 .project-origin {
@@ -804,86 +872,98 @@ h1 {
   border-bottom-color: var(--teal);
 }
 
-/* ---------- Experience accordion ---------- */
+/* ---------- Experience tabs ---------- */
 
 .section-hint {
   font-size: 13px;
   color: var(--ink-soft);
-  margin: -20px 0 24px;
+  margin: 0 0 24px;
 }
 
-.exp-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.exp-card {
+.exp-tabs {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: border-color 0.15s ease;
 }
 
-.exp-card-open {
-  border-left-color: var(--teal);
+.exp-tab-strip {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
 }
 
-.exp-head {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 130px 1fr 20px;
-  grid-template-areas: "date main chevron";
-  gap: 20px;
-  align-items: center;
-  padding: 20px 22px;
+.exp-tab {
+  flex: 1 1 0;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
   background: none;
   border: none;
+  border-right: 1px solid var(--line);
+  border-bottom: 2px solid transparent;
   cursor: pointer;
   text-align: left;
   font-family: inherit;
-  color: inherit;
-}
-
-.exp-date {
-  grid-area: date;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ochre);
-  letter-spacing: 0.05em;
-}
-
-.exp-head-main {
-  grid-area: main;
-  min-width: 0;
-}
-
-.exp-chevron {
-  grid-area: chevron;
-  font-size: 14px;
   color: var(--ink-soft);
-  transition: transform 0.2s ease;
-  justify-self: end;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.exp-tab:last-child {
+  border-right: none;
+}
+
+.exp-tab:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.exp-tab-active {
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom-color: var(--teal);
+}
+
+.exp-tab-org {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.exp-tab-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex: 0 0 auto;
+}
+
+.exp-tab-date {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ochre);
+  letter-spacing: 0.04em;
+}
+
+.exp-tab-panel {
+  padding: 26px 26px 30px;
+  animation: rise 0.35s ease both;
 }
 
 .exp-role {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-}
-
-.exp-org {
-  font-weight: 400;
-  color: var(--ink-soft);
-  font-family: var(--font-body);
-  font-size: 15px;
 }
 
 .exp-current {
@@ -893,19 +973,9 @@ h1 {
 .exp-tagline {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--ink-soft);
-  margin: 0;
+  color: var(--ochre);
+  margin: 0 0 16px;
   line-height: 1.4;
-}
-
-.exp-chevron-open {
-  transform: rotate(180deg);
-  color: var(--teal);
-}
-
-.exp-body {
-  padding: 0 22px 26px;
-  animation: rise 0.35s ease both;
 }
 
 .exp-summary {
@@ -924,7 +994,7 @@ h1 {
 }
 
 .exp-product {
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 14px 16px;
@@ -964,7 +1034,7 @@ h1 {
   font-family: var(--font-mono);
   font-size: 11.5px;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 5px;
   padding: 4px 9px;
@@ -1221,20 +1291,26 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .exp-head {
-    grid-template-columns: 1fr 20px;
-    grid-template-areas:
-      "date chevron"
-      "main main";
-    row-gap: 8px;
+  .exp-tab-strip {
+    flex-direction: column;
   }
 
-  .project-row {
-    grid-template-columns: 40px 1fr;
+  .exp-tab {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
   }
 
-  .project-row-arrow {
-    display: none;
+  .project-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .project-list-col {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stats-strip {
+    grid-template-columns: 1fr 1fr;
   }
 
   .manifesto-closing {
@@ -1251,10 +1327,6 @@ h1 {
 
   .credentials-grid {
     grid-template-columns: 1fr;
-  }
-
-  .stats-strip {
-    grid-template-columns: 1fr 1fr;
   }
 
   .hero-photo-frame::before {

@@ -1,10 +1,17 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/Nav.jsx'
 import Home from './pages/Home.jsx'
 import ProjectPage from './pages/ProjectPage.jsx'
+import { identifyPageView } from './analytics.js'
 
 export default function App() {
+  const location = useLocation()
+
+  useEffect(() => {
+    identifyPageView(location.pathname)
+  }, [location.pathname])
+
   return (
     <div className="page">
       <Nav />
