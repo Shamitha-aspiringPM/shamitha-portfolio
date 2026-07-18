@@ -8,7 +8,7 @@ export default function Nav() {
   return (
     <nav className="nav">
       <Link to="/" className="nav-brand">
-        {isHome ? 'Shamitha Srinivas' : '← Back to portfolio'}
+        {isHome ? 'Shamitha S' : '← Back to portfolio'}
       </Link>
       <div className="nav-links">
         <a href="https://github.com/Shamitha-aspiringPM" target="_blank" rel="noreferrer">

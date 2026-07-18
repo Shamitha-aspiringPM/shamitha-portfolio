@@ -13,7 +13,7 @@ export default function App() {
         <Route path="/projects/:slug" element={<ProjectPage />} />
       </Routes>
       <footer className="footer">
-        <p>Shamitha Srinivas — Mysuru, India</p>
+        <p>Shamitha S — Mysore, India</p>
         <div className="footer-links">
           <a href="https://github.com/Shamitha-aspiringPM" target="_blank" rel="noreferrer">
             GitHub
@@ -21,6 +21,7 @@ export default function App() {
           <a href="https://www.linkedin.com/in/shamitha-srinivas" target="_blank" rel="noreferrer">
             LinkedIn
           </a>
+          <a href="mailto:pentoshamitha@gmail.com">Email</a>
         </div>
       </footer>
     </div>

@@ -1,4 +1,4 @@
-# Shamitha Srinivas — Product Portfolio
+# Shamitha S — Product Portfolio
 
 A multi-page React + Vite portfolio: a home page with a filterable grid of
 shipped products, and a dedicated page per project (VentureForge AI, PayVault,

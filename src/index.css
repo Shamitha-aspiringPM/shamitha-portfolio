@@ -175,6 +175,8 @@ h1 {
 .hero-links {
   display: flex;
   gap: 18px;
+  flex-wrap: wrap;
+  row-gap: 8px;
 }
 
 .hero-links a {
@@ -417,6 +419,107 @@ h1 {
   max-width: 60ch;
 }
 
+.changelog-bullets {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 68ch;
+}
+
+.changelog-bullets li {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---------- Skills ---------- */
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.skill-group-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+  margin: 0 0 12px;
+  text-transform: uppercase;
+}
+
+.skill-pills {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-pills li {
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+/* ---------- Credentials ---------- */
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.credential-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.credential-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ochre);
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.credential-main {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+
+.credential-sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.credential-list {
+  margin: 0;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.credential-list li {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
 /* ---------- Footer ---------- */
 
 .footer {
@@ -570,5 +673,13 @@ h1 {
 
   .section-head-row {
     align-items: flex-start;
+  }
+
+  .skill-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .credentials-grid {
+    grid-template-columns: 1fr;
   }
 }
