@@ -26,7 +26,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: radial-gradient(circle, rgba(31, 36, 25, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -102,21 +104,51 @@ button:focus-visible {
   margin-bottom: 56px;
 }
 
+.hero-photo-frame {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.hero-photo-frame::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 200px;
+  height: 264px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--ochre) 0%, var(--teal) 100%);
+  opacity: 0.35;
+  z-index: 0;
+}
+
 .hero-photo-wrap {
   flex: 0 0 auto;
-  width: 176px;
-  height: 176px;
+  width: 200px;
+  height: 264px;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--surface);
   animation: rise 0.6s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(31, 36, 25, 0.04);
+  pointer-events: none;
 }
 
 .hero-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 8%;
   display: block;
 }
 
@@ -220,6 +252,60 @@ h1 {
   color: var(--ochre);
 }
 
+/* ---------- Perforation divider ---------- */
+
+.perforation {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  margin: -28px 0 40px;
+  overflow: hidden;
+  padding: 0 2px;
+}
+
+.perforation span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+  flex: 0 0 auto;
+}
+
+/* ---------- Stats strip ---------- */
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 56px;
+}
+
+.stat-block {
+  background: var(--surface);
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 34px);
+  font-weight: 600;
+  color: var(--teal);
+  margin: 0 0 4px;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.35;
+}
+
 /* ---------- Sections ---------- */
 
 .section {
@@ -287,19 +373,30 @@ h1 {
 .ticket {
   background: var(--surface);
   border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
   border-radius: 10px;
   padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   text-decoration: none;
   color: inherit;
 }
 
 .ticket:hover {
   border-color: var(--teal);
+  border-left-color: var(--teal);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(31, 36, 25, 0.08);
+}
+
+.ticket-live {
+  border-left-color: var(--teal);
+}
+
+.ticket-shipped {
+  border-left-color: var(--ochre);
 }
 
 .ticket-open {
@@ -373,73 +470,178 @@ h1 {
   border-bottom-color: var(--teal);
 }
 
-/* ---------- Changelog ---------- */
+/* ---------- Experience accordion ---------- */
 
-.changelog {
+.section-hint {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: -20px 0 24px;
+}
+
+.exp-list {
   display: flex;
   flex-direction: column;
+  gap: 14px;
 }
 
-.changelog-row {
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.exp-card-open {
+  border-left-color: var(--teal);
+}
+
+.exp-head {
+  width: 100%;
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: 130px 1fr 20px;
+  grid-template-areas: "date main chevron";
   gap: 20px;
-  padding: 20px 0;
-  border-top: 1px solid var(--line);
+  align-items: center;
+  padding: 20px 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
 }
 
-.changelog-row:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.changelog-date {
+.exp-date {
+  grid-area: date;
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ochre);
-  letter-spacing: 0.06em;
-  padding-top: 3px;
+  letter-spacing: 0.05em;
 }
 
-.changelog-role {
-  font-size: 16px;
+.exp-head-main {
+  grid-area: main;
+  min-width: 0;
+}
+
+.exp-chevron {
+  grid-area: chevron;
+  font-size: 14px;
+  color: var(--ink-soft);
+  transition: transform 0.2s ease;
+  justify-self: end;
+}
+
+.exp-role {
+  font-family: var(--font-display);
+  font-size: 18px;
   font-weight: 600;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.changelog-org {
+.exp-org {
   font-weight: 400;
   color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 15px;
 }
 
-.changelog-note {
-  font-size: 14.5px;
-  line-height: 1.55;
+.exp-current {
+  font-family: var(--font-mono);
+}
+
+.exp-tagline {
+  font-family: var(--font-mono);
+  font-size: 12px;
   color: var(--ink-soft);
   margin: 0;
-  max-width: 60ch;
+  line-height: 1.4;
 }
 
-.changelog-bullets {
-  margin: 0;
-  padding-left: 18px;
+.exp-chevron-open {
+  transform: rotate(180deg);
+  color: var(--teal);
+}
+
+.exp-body {
+  padding: 0 22px 26px;
+  animation: rise 0.35s ease both;
+}
+
+.exp-summary {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 72ch;
+  margin: 0 0 20px;
+}
+
+.exp-products {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-width: 68ch;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
-.changelog-bullets li {
-  font-size: 14.5px;
-  line-height: 1.55;
+.exp-product {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.exp-product-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--teal);
+}
+
+.exp-product ul {
+  margin: 0;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exp-product li {
+  font-size: 13.5px;
+  line-height: 1.5;
   color: var(--ink-soft);
+}
+
+.exp-expertise {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0;
+  margin: 0;
+}
+
+.exp-expertise li {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 4px 9px;
 }
 
 /* ---------- Skills ---------- */
 
 .skill-groups {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .skill-group-label {
@@ -449,6 +651,9 @@ h1 {
   color: var(--teal);
   margin: 0 0 12px;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .skill-pills {
@@ -473,7 +678,7 @@ h1 {
 
 .credentials-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
 
@@ -518,6 +723,22 @@ h1 {
   font-size: 13.5px;
   color: var(--ink-soft);
   line-height: 1.4;
+}
+
+.credential-list-inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 0;
+}
+
+.credential-list-inline li {
+  list-style: none;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 4px 9px;
+  font-size: 12.5px;
 }
 
 /* ---------- Footer ---------- */
@@ -666,9 +887,12 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .changelog-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
+  .exp-head {
+    grid-template-columns: 1fr 20px;
+    grid-template-areas:
+      "date chevron"
+      "main main";
+    row-gap: 8px;
   }
 
   .section-head-row {
@@ -676,10 +900,22 @@ h1 {
   }
 
   .skill-groups {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .credentials-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-photo-frame::before {
+    display: none;
+  }
+
+  .perforation {
+    display: none;
   }
 }

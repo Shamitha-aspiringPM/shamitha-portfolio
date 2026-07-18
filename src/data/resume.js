@@ -1,80 +1,160 @@
 export const experience = [
   {
     date: 'SEP 2024 — PRESENT',
+    current: true,
     role: 'Senior Technical Product Analyst',
     org: 'Guidehouse',
-    bullets: [
-      'Proposed and secured leadership buy-in for transforming Power BI dashboards into a scalable React-based analytics product with AI-powered insight generation — owning the initiative end-to-end in a Product Manager capacity across strategy, roadmap, requirements, and stakeholder alignment, with a projected 40–50% reduction in manual analytical effort.',
-      'Leading development of an AI-powered Intelligent Document Processing platform using OCR and LLM-based extraction to convert payer-issued Explanation of Benefits documents into structured claim data, targeting 91% extraction accuracy and 60–70% less manual processing time.',
-      'Defined product requirements and drove delivery for a 20+ module enterprise analytics platform, enabling self-service reporting and contributing to 30% higher platform adoption.',
+    tagline: 'U.S. Healthcare | Payer Analytics | Product Management | Enterprise Analytics',
+    summary:
+      'Senior Technical Product Analyst delivering enterprise analytics products for U.S. healthcare payer organizations. Specializing in payer-provider analytics, claims analytics, claims adjudication reporting, and 835 ERA/remittance data processing, translating complex healthcare workflows into scalable product solutions. Work includes AI-driven Intelligent Document Processing (OCR), enterprise reporting modernization, data transformation, and Agile product delivery — collaborating with business stakeholders, data engineers, and development teams to build data-driven healthcare solutions that enhance operational efficiency and support strategic decision-making.',
+    expertise: [
+      'U.S. Healthcare Payer Analytics',
+      'Provider Performance Analytics',
+      'Claims Analytics & Adjudication',
+      '835 ERA / Remittance Processing',
+      'OCR & Intelligent Document Processing',
+      'Healthcare Data Transformation',
+      'Enterprise Reporting & Analytics',
+      'Product Requirements & User Stories',
+      'Backlog Prioritization',
+      'Stakeholder Management',
+      'Power BI',
+      'Azure Synapse',
+      'ADLS',
+      'SQL',
+      'Jira',
     ],
   },
   {
     date: 'FEB 2022 — JUN 2024',
     role: 'Product Owner',
     org: 'Kaos Agency',
-    bullets: [
-      'Defined and executed product strategy for an AI/NLP-powered publishing platform that turned raw news inputs into publication-ready articles, cutting manual content creation effort by 60–80% and accelerating publishing turnaround 3–5x.',
-      'Built the product foundation for a consumer health app from concept to MVP — workflows, wireframes, specs, release plans, and 10+ KPIs across acquisition, activation, engagement, and retention — improving onboarding conversion by 20–30%.',
-      'Owned end-to-end product development of an API-first employee feedback and CRM platform from 0→1 across 20+ modules, improving operational productivity by 30–40%.',
+    tagline: 'Product Strategy | SaaS Products | Agile Delivery | Customer Experience',
+    summary:
+      'Product Owner with experience leading the development of B2B SaaS and enterprise applications from concept to delivery. Specialized in product strategy, roadmap planning, user story creation, backlog prioritization, and Agile product delivery — collaborating with cross-functional teams, translating business needs into customer-centric features, and driving continuous product improvements through stakeholder feedback and user research.',
+    products: [
+      {
+        name: 'Employee Feedback & Performance Platform',
+        bullets: [
+          'Led product development of an employee feedback platform supporting anonymous and non-anonymous feedback workflows.',
+          'Defined role-based access, feedback lifecycle, action tracking, and performance improvement features.',
+          'Collaborated closely with engineering to translate business requirements into product increments.',
+        ],
+      },
+      {
+        name: 'CRM & Account Management Portal',
+        bullets: [
+          'Owned product enhancements for a CRM platform designed to streamline customer account management and operational workflows.',
+          'Worked with stakeholders to identify process bottlenecks and prioritize high-impact features that improved usability and productivity.',
+        ],
+      },
+    ],
+    expertise: [
+      'Product Vision & Strategy',
+      'Roadmap Planning',
+      'Requirement Elicitation',
+      'User Research',
+      'Feature Prioritization',
+      'Agile Scrum',
+      'Sprint Planning',
+      'Backlog Grooming',
+      'Acceptance Criteria',
+      'Stakeholder Communication',
+      'Jira',
+      'Confluence',
+      'Figma (Wireframe Reviews)',
     ],
   },
   {
     date: 'DEC 2016 — APR 2020',
-    role: 'SCA - Test Analyst',
+    role: 'Test Analyst',
     org: 'Wipro Technologies',
-    bullets: [
-      'Automated validation workflows for insurance products, reducing manual verification effort and improving testing accuracy across high-volume document processing.',
-      'Analyzed complex business rules and converted regulatory changes into detailed functional test scenarios, improving defect detection and release quality.',
-      'Partnered with business and engineering teams during critical production releases, ensuring requirement alignment and minimal business disruption.',
+    tagline: 'Quality Engineering | Banking & Insurance | Enterprise Applications',
+    summary:
+      'Began my career as a Test Analyst, delivering quality assurance for enterprise banking and insurance applications. Gained hands-on experience in functional testing, API validation, Agile delivery, and stakeholder collaboration while building a strong foundation in software quality, SDLC, and business process understanding that later enabled my transition into Product Management.',
+    expertise: [
+      'Functional & Regression Testing',
+      'API Testing (Postman, SOAP UI)',
+      'Test Planning & Case Design',
+      'Defect Lifecycle Management',
+      'SDLC & Agile Methodologies',
+      'Banking & Insurance Domain',
+      'Jira',
+      'HP ALM',
+      'Tosca',
     ],
   },
+]
+
+export const stats = [
+  { value: '7+', label: 'Years across product & tech' },
+  { value: '3', label: 'Domains — healthtech, fintech, insurtech' },
+  { value: '5+', label: 'Concurrent products owned at once' },
+  { value: '30%', label: 'Adoption lift, enterprise analytics' },
 ]
 
 export const skillGroups = [
   {
     label: 'Product',
+    icon: 'clipboard',
     skills: [
+      'Agile',
+      'Product Strategy',
       'Product Roadmap',
+      'PRD',
       'User Stories',
-      'Backlog Management',
       'Prioritization',
-      'MVP Validation',
+      'Backlog Management',
+      'Lean MVP',
+      'OKRs',
+      'KPIs',
       'Product Metrics',
-      'Competitive & Market Analysis',
+      'Stakeholder Management',
+      'Cross-functional Collaboration',
+      'MVP Validation',
     ],
+  },
+  {
+    label: 'AI & Automation',
+    icon: 'spark',
+    skills: [
+      'AI Agent Development',
+      'Prompt Engineering',
+      'Copilot',
+      'Claude',
+      'ChatGPT',
+      'Rapid Prototyping',
+      'Workflow Automation',
+    ],
+  },
+  {
+    label: 'Data & Analytics',
+    icon: 'chart',
+    skills: ['SQL', 'Snowflake', 'Power BI', 'Azure Synapse', 'ADLS', 'Looker Studio', 'Mixpanel'],
   },
   {
     label: 'Tools',
-    skills: ['Jira', 'Confluence', 'SQL', 'Power BI', 'Mixpanel', 'Figma', 'GitHub', 'Rapid Prototyping'],
-  },
-  {
-    label: 'Ways of working',
-    skills: [
-      'Workflow Automation',
-      'AI Agent Development',
-      'Prompt Engineering',
-      'Agile Methodologies',
-      'Consumer Behavior Insights',
-      'Cross-functional Collaboration',
-      'Stakeholder Management',
-    ],
+    icon: 'wrench',
+    skills: ['Jira', 'Figma', 'GitHub', 'Confluence', 'HP ALM', 'Tosca', 'Excel', 'VS Code'],
   },
 ]
 
 export const education = {
   degree: 'Bachelor of Science — Computer Science, Electronics and Mathematics',
   school: 'University of Mysore, Mysore, Karnataka',
-  date: 'June 2016',
+  date: '2013 — 2016',
 }
 
 export const certifications = [
   'AI Prototyping for Product Managers — Udemy',
   'Green Belt, Six Sigma — Six Sigma Academy',
-  'Design Thinking — QGule',
+  'Amsterdam Design Thinking — QGule',
+  'Agile Methodologies — Udemy',
 ]
 
 export const accomplishments = ['Guidehouse Gem Award, 2025']
+
+export const languages = ['English', 'Hindi', 'Kannada', 'Telugu']
 
 export const contact = {
   email: 'pentoshamitha@gmail.com',

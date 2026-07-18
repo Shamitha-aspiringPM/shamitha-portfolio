@@ -1,12 +1,16 @@
 import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects.js'
+import Icon from '../components/Icon.jsx'
+import ExperienceCard from '../components/ExperienceCard.jsx'
 import {
   experience,
+  stats,
   skillGroups,
   education,
   certifications,
   accomplishments,
+  languages,
   contact,
 } from '../data/resume.js'
 
@@ -27,16 +31,18 @@ export default function Home() {
   return (
     <>
       <header className="hero">
-        <div className="hero-photo-wrap">
-          <img src="/shamitha.png" alt="Portrait of Shamitha S" className="hero-photo" />
+        <div className="hero-photo-frame">
+          <div className="hero-photo-wrap">
+            <img src="/shamitha.png" alt="Portrait of Shamitha S" className="hero-photo" />
+          </div>
         </div>
         <div className="hero-copy">
           <p className="eyebrow">HEALTHCARE SAAS · ENTERPRISE ANALYTICS · AI PRODUCTS</p>
           <h1>Shamitha S</h1>
           <p className="hero-role">Product Owner &amp; Senior Technical Product Analyst</p>
           <p className="hero-tagline">
-            7+ years turning ambiguous problems into shipped products across healthcare SaaS,
-            enterprise analytics, and AI-driven development — from discovery to delivery.
+            7+ years turning ambiguous problems into shipped products across U.S. healthcare
+            SaaS, enterprise analytics, and AI-driven development — from discovery to delivery.
           </p>
           <div className="hero-links">
             <a href="https://github.com/Shamitha-aspiringPM" target="_blank" rel="noreferrer">
@@ -50,6 +56,21 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      <div className="perforation" aria-hidden="true">
+        {Array.from({ length: 40 }).map((_, i) => (
+          <span key={i} />
+        ))}
+      </div>
+
+      <div className="stats-strip">
+        {stats.map((s) => (
+          <div className="stat-block" key={s.label}>
+            <p className="stat-value">{s.value}</p>
+            <p className="stat-label">{s.label}</p>
+          </div>
+        ))}
+      </div>
 
       <main>
         <section className="section">
@@ -74,7 +95,11 @@ export default function Home() {
 
           <div className="ticket-grid">
             {visible.map((p) => (
-              <Link to={`/projects/${p.slug}`} className="ticket" key={p.id}>
+              <Link
+                to={`/projects/${p.slug}`}
+                className={`ticket ticket-${p.status.toLowerCase()}`}
+                key={p.id}
+              >
                 <div className="ticket-head">
                   <span className="ticket-id">{p.id}</span>
                   <StatusTag status={p.status} />
@@ -95,21 +120,10 @@ export default function Home() {
         <section className="section">
           <p className="eyebrow">CHANGELOG</p>
           <h2 className="section-title">Experience</h2>
-          <div className="changelog">
-            {experience.map((c) => (
-              <div className="changelog-row" key={c.org}>
-                <span className="changelog-date">{c.date}</span>
-                <div className="changelog-body">
-                  <p className="changelog-role">
-                    {c.role} <span className="changelog-org">— {c.org}</span>
-                  </p>
-                  <ul className="changelog-bullets">
-                    {c.bullets.map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+          <p className="section-hint">Tap a role to expand the full write-up.</p>
+          <div className="exp-list">
+            {experience.map((item, i) => (
+              <ExperienceCard item={item} key={item.org} defaultOpen={i === 0} />
             ))}
           </div>
         </section>
@@ -120,7 +134,9 @@ export default function Home() {
           <div className="skill-groups">
             {skillGroups.map((g) => (
               <div className="skill-group" key={g.label}>
-                <p className="skill-group-label">{g.label}</p>
+                <p className="skill-group-label">
+                  <Icon name={g.icon} /> {g.label}
+                </p>
                 <ul className="skill-pills">
                   {g.skills.map((s) => (
                     <li key={s}>{s}</li>
@@ -155,6 +171,14 @@ export default function Home() {
               <ul className="credential-list">
                 {accomplishments.map((a) => (
                   <li key={a}>{a}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="credential-card">
+              <p className="credential-label">Languages</p>
+              <ul className="credential-list credential-list-inline">
+                {languages.map((l) => (
+                  <li key={l}>{l}</li>
                 ))}
               </ul>
             </div>
