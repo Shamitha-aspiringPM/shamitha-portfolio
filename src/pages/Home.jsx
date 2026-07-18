@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { projects } from '../data/projects.js'
-import { manifesto } from '../data/about.js'
+import { showcase } from '../data/showcase.js'
+import { manifesto, specialization, currentlyExploring } from '../data/about.js'
 import Icon from '../components/Icon.jsx'
 import ExperienceTabs from '../components/ExperienceTabs.jsx'
 import StatCard from '../components/StatCard.jsx'
@@ -22,17 +22,17 @@ function StatusTag({ status }) {
   return <span className={`status-tag status-${status.toLowerCase()}`}>{status}</span>
 }
 
-const FILTERS = ['ALL', 'LIVE', 'SHIPPED']
+const FILTERS = ['ALL', 'WORK', 'PERSONAL']
 
 export default function Home() {
   const [filter, setFilter] = useState('ALL')
 
   const visible = useMemo(
-    () => (filter === 'ALL' ? projects : projects.filter((p) => p.status === filter)),
+    () => (filter === 'ALL' ? showcase : showcase.filter((p) => p.kind === filter.toLowerCase())),
     [filter],
   )
 
-  const [previewSlug, setPreviewSlug] = useState(projects[0]?.slug)
+  const [previewSlug, setPreviewSlug] = useState(showcase[0]?.slug)
   const preview = visible.find((p) => p.slug === previewSlug) || visible[0]
 
   return (
@@ -45,12 +45,12 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-copy">
-          <p className="eyebrow">HEALTHCARE SAAS · ENTERPRISE ANALYTICS · AI PRODUCTS</p>
+          <p className="eyebrow">PAYER · PROVIDER · FINANCIAL · MARKET INTELLIGENCE</p>
           <h1>Shamitha S</h1>
           <p className="hero-role">Product Owner &amp; Senior Technical Product Analyst</p>
           <p className="hero-tagline">
-            7+ years turning ambiguous problems into shipped products across U.S. healthcare
-            SaaS, enterprise analytics, and AI-driven development — from discovery to delivery.
+            Building enterprise healthcare analytics products across U.S. payer, provider,
+            financial, and market intelligence — plus AI prototypes shipped independently.
           </p>
           <div className="hero-links">
             <a href="https://github.com/Shamitha-aspiringPM" target="_blank" rel="noreferrer">
@@ -74,6 +74,19 @@ export default function Home() {
           ))}
         </div>
         <p className="manifesto-closing">{manifesto.closing}</p>
+        <div className="specialization-box">
+          <p className="eyebrow">WHAT I SPECIALIZE IN</p>
+          <p className="specialization-text">{specialization}</p>
+        </div>
+      </Reveal>
+
+      <Reveal className="exploring-strip">
+        <span className="exploring-label">Currently exploring</span>
+        <ul className="exploring-pills">
+          {currentlyExploring.map((c) => (
+            <li key={c}>{c}</li>
+          ))}
+        </ul>
       </Reveal>
 
       <Reveal className="stats-strip">
@@ -88,10 +101,10 @@ export default function Home() {
             <div className="section-head-row">
               <div>
                 <p className="eyebrow">WHAT I'VE BUILT</p>
-                <h2 className="section-title">Products that started as friction</h2>
-                <p className="section-hint">Hover a project to preview, click to open it.</p>
+                <h2 className="section-title">Work case studies &amp; independent products</h2>
+                <p className="section-hint">Hover to preview, click to open the full write-up.</p>
               </div>
-              <div className="filter-group" role="group" aria-label="Filter projects by status">
+              <div className="filter-group" role="group" aria-label="Filter by type">
                 {FILTERS.map((f) => (
                   <button
                     key={f}
@@ -110,15 +123,20 @@ export default function Home() {
             <div className="project-list-col">
               {visible.map((p, i) => (
                 <Link
-                  to={`/projects/${p.slug}`}
-                  key={p.id}
+                  to={p.path}
+                  key={p.slug}
                   className={`project-list-item ${preview?.slug === p.slug ? 'is-active' : ''}`}
                   onMouseEnter={() => setPreviewSlug(p.slug)}
                   onFocus={() => setPreviewSlug(p.slug)}
-                  onClick={() => track('Project Opened', { project: p.name })}
+                  onClick={() => track('Project Opened', { project: p.name, kind: p.kind })}
                 >
                   <span className="project-list-num">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="project-list-name">{p.name}</span>
+                  <div className="project-list-main">
+                    <span className="project-list-name">{p.name}</span>
+                    <span className="project-list-kind">
+                      {p.kind === 'work' ? 'CASE STUDY' : 'PERSONAL PROJECT'}
+                    </span>
+                  </div>
                   <StatusTag status={p.status} />
                 </Link>
               ))}
@@ -134,7 +152,9 @@ export default function Home() {
                     <li key={t}>{t}</li>
                   ))}
                 </ul>
-                <span className="preview-cta">Open case study →</span>
+                <span className="preview-cta">
+                  {preview.kind === 'work' ? 'Open case study →' : 'Open project →'}
+                </span>
               </div>
             )}
           </Reveal>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { track } from '../analytics.js'
 
 export default function ExperienceTabs({ items }) {
@@ -37,6 +38,20 @@ export default function ExperienceTabs({ items }) {
         </p>
         <p className="exp-tagline">{item.tagline}</p>
         <p className="exp-summary">{item.summary}</p>
+
+        {item.highlights && (
+          <ul className="case-study-list exp-highlights">
+            {item.highlights.map((h, i) => (
+              <li key={i}>{h}</li>
+            ))}
+          </ul>
+        )}
+
+        {item.caseStudySlug && (
+          <Link to={`/work/${item.caseStudySlug}`} className="exp-case-study-link">
+            Read the full case study →
+          </Link>
+        )}
 
         {item.products && (
           <div className="exp-products">

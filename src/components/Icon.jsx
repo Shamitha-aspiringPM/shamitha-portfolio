@@ -23,6 +23,7 @@ const paths = {
   wrench: (
     <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.9 2.9-2-2 2.9-2.9Z" />
   ),
+  pulse: <path d="M3 12h4l2-7 4 14 2-7h6" />,
 }
 
 export default function Icon({ name, size = 16 }) {
