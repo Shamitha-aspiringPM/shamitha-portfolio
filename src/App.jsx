@@ -4,6 +4,7 @@ import Nav from './components/Nav.jsx'
 import Home from './pages/Home.jsx'
 import ProjectPage from './pages/ProjectPage.jsx'
 import CaseStudyPage from './pages/CaseStudyPage.jsx'
+import CopyableEmail from './components/CopyableEmail.jsx'
 import { identifyPageView } from './analytics.js'
 
 export default function App() {
@@ -30,7 +31,7 @@ export default function App() {
           <a href="https://www.linkedin.com/in/shamitha-srinivas" target="_blank" rel="noreferrer">
             LinkedIn
           </a>
-          <a href="mailto:pentoshamitha@gmail.com">Email</a>
+          <CopyableEmail email="pentoshamitha@gmail.com" />
         </div>
       </footer>
     </div>

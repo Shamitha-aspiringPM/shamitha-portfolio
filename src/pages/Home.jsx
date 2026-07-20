@@ -6,6 +6,7 @@ import Icon from '../components/Icon.jsx'
 import ExperienceTabs from '../components/ExperienceTabs.jsx'
 import StatCard from '../components/StatCard.jsx'
 import Reveal from '../components/Reveal.jsx'
+import CopyableEmail from '../components/CopyableEmail.jsx'
 import { track } from '../analytics.js'
 import {
   experience,
@@ -59,7 +60,7 @@ export default function Home() {
             <a href="https://www.linkedin.com/in/shamitha-srinivas" target="_blank" rel="noreferrer">
               LinkedIn ↗
             </a>
-            <a href={`mailto:${contact.email}`}>Email ↗</a>
+            <CopyableEmail email={contact.email} />
             <a href={`tel:${contact.phone.replace(/\s+/g, '')}`}>{contact.phone}</a>
           </div>
         </div>
