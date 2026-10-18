@@ -23,13 +23,17 @@ function StatusTag({ status }) {
   return <span className={`status-tag status-${status.toLowerCase().replace(/\s+/g, '-')}`}>{status}</span>
 }
 
-const FILTERS = ['ALL', 'WORK', 'PERSONAL']
+const FILTERS = [
+  { label: 'ALL', value: 'all' },
+  { label: 'PROFESSIONAL', value: 'work' },
+  { label: 'SIDE PROJECTS', value: 'personal' },
+]
 
 export default function Home() {
-  const [filter, setFilter] = useState('ALL')
+  const [filter, setFilter] = useState('all')
 
   const visible = useMemo(
-    () => (filter === 'ALL' ? showcase : showcase.filter((p) => p.kind === filter.toLowerCase())),
+    () => (filter === 'all' ? showcase : showcase.filter((p) => p.kind === filter)),
     [filter],
   )
 
@@ -102,18 +106,18 @@ export default function Home() {
             <div className="section-head-row">
               <div>
                 <p className="eyebrow">WHAT I'VE BUILT</p>
-                <h2 className="section-title">Work case studies &amp; independent products</h2>
+                <h2 className="section-title">Professional work &amp; side projects</h2>
                 <p className="section-hint">Hover to preview, click to open the full write-up.</p>
               </div>
               <div className="filter-group" role="group" aria-label="Filter by type">
                 {FILTERS.map((f) => (
                   <button
-                    key={f}
-                    className={`filter-btn ${filter === f ? 'filter-btn-active' : ''}`}
-                    onClick={() => setFilter(f)}
-                    aria-pressed={filter === f}
+                    key={f.value}
+                    className={`filter-btn ${filter === f.value ? 'filter-btn-active' : ''}`}
+                    onClick={() => setFilter(f.value)}
+                    aria-pressed={filter === f.value}
                   >
-                    {f}
+                    {f.label}
                   </button>
                 ))}
               </div>
@@ -123,9 +127,14 @@ export default function Home() {
           <Reveal className="project-showcase">
             <div className="project-list-col">
               {visible.map((p, i) => (
+                <React.Fragment key={p.slug}>
+                  {(i === 0 || visible[i - 1].kind !== p.kind) && (
+                    <p className="project-group-label">
+                      {p.kind === 'work' ? 'Professional work' : 'Side projects'}
+                    </p>
+                  )}
                 <Link
                   to={p.path}
-                  key={p.slug}
                   className={`project-list-item ${preview?.slug === p.slug ? 'is-active' : ''}`}
                   onMouseEnter={() => setPreviewSlug(p.slug)}
                   onFocus={() => setPreviewSlug(p.slug)}
@@ -135,11 +144,12 @@ export default function Home() {
                   <div className="project-list-main">
                     <span className="project-list-name">{p.name}</span>
                     <span className="project-list-kind">
-                      {p.kind === 'work' ? 'CASE STUDY' : 'PERSONAL PROJECT'}
+                      {p.kind === 'work' ? 'CASE STUDY' : 'SIDE PROJECT'}
                     </span>
                   </div>
                   <StatusTag status={p.status} />
                 </Link>
+                </React.Fragment>
               ))}
             </div>
 

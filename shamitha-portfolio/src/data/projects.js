@@ -1,0 +1,116 @@
+export const projects = [
+  {
+    id: 'PORT-01',
+    slug: 'ventureforge-ai',
+    status: 'LIVE',
+    name: 'VentureForge AI',
+    origin: 'It started with watching my husband struggle to prompt AI effectively for something that mattered.',
+    summary:
+      'AI-powered venture analysis tool that lets founders validate, plan, and stress-test an idea.',
+    tags: ['React', 'Claude API', 'Mixpanel'],
+    live: 'https://ventureforge-ai-ten.vercel.app',
+    repo: 'https://github.com/Shamitha-aspiringPM',
+    caseStudy: [
+      'Startups had no single platform to validate, plan, and stress-test an idea before committing to it — VentureForge AI was built to close that gap.',
+      'Taken from concept to live product end-to-end: problem definition, user flows, UI, the React build, and Claude API integration for the analysis itself. Mixpanel is wired in to track how people actually move through the tool, not just whether it loads.',
+      'The product problem wasn\u2019t the AI call — it was designing a flow that turns a vague, one-line idea into a structured, stress-tested plan without the input process itself becoming a chore.',
+    ],
+  },
+  {
+    id: 'PORT-02',
+    slug: 'payvault',
+    status: 'PROTOTYPE',
+    name: 'PayVault',
+    origin: 'It started with tracking my own invisible subscription spend — money leaking out in small, easy-to-miss amounts.',
+    summary: 'A UPI payment app prototype with subscription management, for Indian consumers.',
+    tags: ['React', 'Figma', 'Fintech UX'],
+    live: 'https://prototype-payvault.netlify.app',
+    repo: 'https://github.com/Shamitha-aspiringPM',
+    notionCaseStudy: 'https://app.notion.com/p/PayVault-3892b3a793688013894bcd3cf209879e',
+    caseStudy: [
+      'Indian consumers had no unified way to track payments and subscriptions together — PayVault, a UPI payment app prototype with subscription management, was built to address that gap.',
+      'Designed end-to-end in Figma before being shipped as a live React prototype, so the interaction design was proven out before a single line of the build started.',
+      'The full write-up — problem framing, flow decisions, and what I\u2019d change next — is in the linked case study.',
+    ],
+  },
+  {
+    id: 'PORT-03',
+    slug: 'trade-journal',
+    status: 'LIVE',
+    name: 'Trade Journal',
+    origin: 'It started with watching my father manually journal his trades on paper, night after night.',
+    summary: 'A full-stack intraday trading journal, built end-to-end.',
+    tags: ['React', 'Vite', 'Supabase'],
+    live: 'https://trade-journal-pi-seven.vercel.app',
+    repo: 'https://github.com/Shamitha-aspiringPM',
+    video: '/video/trade-journal-demo.mp4',
+    caseStudy: [
+      'Trade Journal is a full-stack intraday trading journal — log trades, review them, and track patterns over time. Built end-to-end: schema, auth, and deploy.',
+      'React + Vite on the front end, Supabase for auth and data, deployed on Vercel. Getting from local dev to a working deploy meant working through real environment friction along the way — Windows PowerShell quirks, a Vite version conflict, and Supabase auth configuration that didn\u2019t work on the first pass.',
+      'The demo below walks through the actual product.',
+    ],
+  },
+  {
+    id: 'PORT-05',
+    slug: 'stockwise-ai',
+    status: 'PROTOTYPE',
+    name: 'StockWise AI',
+    summary:
+      'Spreadsheet-first inventory intelligence for small retailers — flags stockout risk and prioritises replenishment within a purchasing budget.',
+    tags: ['Inventory Intelligence', 'Retail', 'Rule-Based Analytics', 'PRD'],
+    live: 'https://stockwiseprototype.netlify.app',
+    repo: 'https://github.com/Shamitha-aspiringPM',
+    caseStudy: [
+      'Small and medium-sized retailers often run inventory out of spreadsheets, without the analytical capacity to spot stockout risk, excess stock, or what to buy first when the purchasing budget cannot cover everything. StockWise AI turns an uploaded inventory spreadsheet into prioritised replenishment decisions.',
+      'The MVP is deliberately rule-based and transparent rather than autonomous: upload a standardised template, see inventory health and stockout-risk classification, then simulate replenishment under a budget. It is a decision-support tool, not an ERP replacement.',
+      'This is an MVP prototype — built, with further validation and refinement still required.',
+    ],
+    prd: {
+      coreProblem:
+        'Retailers lack a simple way to translate inventory data into prioritised purchasing decisions while balancing stockout risk, supplier lead times, and budget constraints.',
+      p0: [
+        'Downloadable inventory template',
+        'CSV and Excel upload with required-column and numeric validation',
+        'Inventory dashboard and product-level health analysis',
+        'Stockout-risk classification',
+        'Reorder quantity and estimated order-cost calculations',
+        'Budget-constrained replenishment simulation',
+        'Search, risk filtering, and downloadable reports',
+      ],
+      p1: [
+        'Demand calculations from historical sales records',
+        'Improved safety-stock configuration',
+        'Incoming purchase-order support',
+        'AI-generated explanations grounded in calculated results',
+      ],
+      p2: [
+        'Saved uploads and analysis history',
+        'Month-on-month inventory comparisons',
+        'User accounts and workspaces',
+      ],
+      nonGoals: [
+        'Automated purchase orders or supplier transactions',
+        'ERP, POS, or warehouse integrations',
+        'Advanced machine-learning demand forecasting',
+        'Autonomous AI decision-making',
+      ],
+    },
+  },
+  {
+    id: 'PORT-04',
+    slug: 'cortexon-academy',
+    status: 'IN PROGRESS',
+    name: 'Cortexon Academy',
+    origin: 'This one started differently — an honorary build for a real local business, not a self-directed exercise.',
+    summary: 'A multi-page website for a Mysore-based Abacus and Vedic Mathematics academy — still in progress.',
+    tags: ['React', 'Vite', 'Client Project', 'Honorary'],
+    live: null,
+    repo: 'https://github.com/Shamitha-aspiringPM',
+    caseStudy: [
+      'A multi-page website being built for Cortexon Academy LLP, a Mysore-based Abacus and Vedic Mathematics academy — a real local business, not a self-directed exercise. This one is done on an honorary basis and is still in progress, not yet live.',
+      'Built with React and Vite, to be deployed on Vercel once complete. Working with an actual client means designing for their students and parents as the real audience, not an abstract one.',
+    ],
+  },
+]
+
+export const getProject = (slug) => projects.find((p) => p.slug === slug)

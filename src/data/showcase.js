@@ -5,10 +5,11 @@ import { caseStudies } from './caseStudies.js'
 // interleaved with personal projects.
 const order = [
   { kind: 'work', slug: 'enterprise-healthcare-analytics' },
-  { kind: 'personal', slug: 'ventureforge-ai' },
   { kind: 'work', slug: 'intelligent-document-processing' },
+  { kind: 'personal', slug: 'ventureforge-ai' },
   { kind: 'personal', slug: 'trade-journal' },
   { kind: 'personal', slug: 'payvault' },
+  { kind: 'personal', slug: 'stockwise-ai' },
   { kind: 'personal', slug: 'cortexon-academy' },
 ]
 

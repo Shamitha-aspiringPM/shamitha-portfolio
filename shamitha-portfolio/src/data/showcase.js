@@ -1,0 +1,27 @@
+import { projects } from './projects.js'
+import { caseStudies } from './caseStudies.js'
+
+// Order matches reviewer feedback: lead with the strongest work (Guidehouse),
+// interleaved with personal projects.
+const order = [
+  { kind: 'work', slug: 'enterprise-healthcare-analytics' },
+  { kind: 'work', slug: 'intelligent-document-processing' },
+  { kind: 'personal', slug: 'ventureforge-ai' },
+  { kind: 'personal', slug: 'trade-journal' },
+  { kind: 'personal', slug: 'payvault' },
+  { kind: 'personal', slug: 'stockwise-ai' },
+  { kind: 'personal', slug: 'cortexon-academy' },
+]
+
+export const showcase = order
+  .map(({ kind, slug }, i) => {
+    const item = kind === 'work' ? caseStudies.find((c) => c.slug === slug) : projects.find((p) => p.slug === slug)
+    if (!item) return null
+    return {
+      ...item,
+      kind,
+      num: i + 1,
+      path: kind === 'work' ? `/work/${slug}` : `/projects/${slug}`,
+    }
+  })
+  .filter(Boolean)

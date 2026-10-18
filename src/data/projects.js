@@ -19,7 +19,7 @@ export const projects = [
   {
     id: 'PORT-02',
     slug: 'payvault',
-    status: 'LIVE',
+    status: 'PROTOTYPE',
     name: 'PayVault',
     origin: 'It started with tracking my own invisible subscription spend — money leaking out in small, easy-to-miss amounts.',
     summary: 'A UPI payment app prototype with subscription management, for Indian consumers.',
@@ -49,6 +49,52 @@ export const projects = [
       'React + Vite on the front end, Supabase for auth and data, deployed on Vercel. Getting from local dev to a working deploy meant working through real environment friction along the way — Windows PowerShell quirks, a Vite version conflict, and Supabase auth configuration that didn\u2019t work on the first pass.',
       'The demo below walks through the actual product.',
     ],
+  },
+  {
+    id: 'PORT-05',
+    slug: 'stockwise-ai',
+    status: 'PROTOTYPE',
+    name: 'StockWise AI',
+    summary:
+      'Spreadsheet-first inventory intelligence for small retailers — flags stockout risk and prioritises replenishment within a purchasing budget.',
+    tags: ['Inventory Intelligence', 'Retail', 'Rule-Based Analytics', 'PRD'],
+    live: 'https://stockwiseprototype.netlify.app',
+    repo: 'https://github.com/Shamitha-aspiringPM',
+    caseStudy: [
+      'Small and medium-sized retailers often run inventory out of spreadsheets, without the analytical capacity to spot stockout risk, excess stock, or what to buy first when the purchasing budget cannot cover everything. StockWise AI turns an uploaded inventory spreadsheet into prioritised replenishment decisions.',
+      'The MVP is deliberately rule-based and transparent rather than autonomous: upload a standardised template, see inventory health and stockout-risk classification, then simulate replenishment under a budget. It is a decision-support tool, not an ERP replacement.',
+      'This is an MVP prototype — built, with further validation and refinement still required.',
+    ],
+    prd: {
+      coreProblem:
+        'Retailers lack a simple way to translate inventory data into prioritised purchasing decisions while balancing stockout risk, supplier lead times, and budget constraints.',
+      p0: [
+        'Downloadable inventory template',
+        'CSV and Excel upload with required-column and numeric validation',
+        'Inventory dashboard and product-level health analysis',
+        'Stockout-risk classification',
+        'Reorder quantity and estimated order-cost calculations',
+        'Budget-constrained replenishment simulation',
+        'Search, risk filtering, and downloadable reports',
+      ],
+      p1: [
+        'Demand calculations from historical sales records',
+        'Improved safety-stock configuration',
+        'Incoming purchase-order support',
+        'AI-generated explanations grounded in calculated results',
+      ],
+      p2: [
+        'Saved uploads and analysis history',
+        'Month-on-month inventory comparisons',
+        'User accounts and workspaces',
+      ],
+      nonGoals: [
+        'Automated purchase orders or supplier transactions',
+        'ERP, POS, or warehouse integrations',
+        'Advanced machine-learning demand forecasting',
+        'Autonomous AI decision-making',
+      ],
+    },
   },
   {
     id: 'PORT-04',

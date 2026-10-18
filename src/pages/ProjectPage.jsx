@@ -66,6 +66,47 @@ export default function ProjectPage() {
         ))}
       </div>
 
+      {project.prd && (
+        <div className="case-study-sections prd-sections">
+          <section className="case-study-section">
+            <p className="eyebrow">CORE PROBLEM</p>
+            <p>{project.prd.coreProblem}</p>
+          </section>
+          <section className="case-study-section">
+            <p className="eyebrow">MVP SCOPE — P0</p>
+            <ul className="case-study-list">
+              {project.prd.p0.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+          </section>
+          <section className="case-study-section">
+            <p className="eyebrow">NEXT — P1</p>
+            <ul className="case-study-list">
+              {project.prd.p1.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+          </section>
+          <section className="case-study-section">
+            <p className="eyebrow">LATER — P2</p>
+            <ul className="case-study-list">
+              {project.prd.p2.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+          </section>
+          <section className="case-study-section">
+            <p className="eyebrow">DELIBERATELY OUT OF SCOPE</p>
+            <ul className="case-study-list">
+              {project.prd.nonGoals.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      )}
+
       <div className="project-next">
         <span className="eyebrow">NEXT — {next.kind === 'work' ? 'CASE STUDY' : 'PROJECT'}</span>
         <Link to={next.path} className="project-next-link">
